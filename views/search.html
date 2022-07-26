@@ -1,0 +1,60 @@
+{{ template "header" . }}
+<div class="container m-5 p-2 rounded mx-auto bg-light shadow">
+    <!-- App title section -->
+    <div class="row m-1 p-4">
+        <div class="col">
+            <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
+                <p>Search Customers</p>
+            </div>
+        </div>
+    </div>
+    <div class="p-2 m-2 mx-4 border-black-25 border-bottom"></div>
+
+    <div id="customers">
+        <input class="search" placeholder="Search" />
+
+        <table class="table-light">
+            <thead>
+                <tr>
+                  <th scope="col"><button class="sort" data-sort="first_name">First Name</button></th>
+                  <th scope="col"><button class="sort" data-sort="last_name">
+                    Last Name
+                  </button></th>
+                  <th scope="col"><button class="sort" data-sort="birthdate">
+                    Birth Date
+                  </button></th>
+                  <th scope="col"><button class="sort" data-sort="gender">
+                    Gender
+                  </button></th>
+                  <th scope="col"><button class="sort" data-sort="email">
+                    Email
+                  </button></th>
+                </tr>
+              </thead>
+          <tbody class="list">
+            {{range .Customers}}
+            <tr>
+                <td class="first_name">{{.First_name}}</td>&nbsp;
+                <td class="last_name">{{.Last_name}}</td>&nbsp;
+                <td class="birthdate">{{.Birth_date}}</td>&nbsp;
+                <td class="gender">{{.Gender}}</td>&nbsp;
+                <td class="email">{{.Email}}</td>&nbsp;
+                <td class="show"><a href="/show/user/{{.User_id}}">Show</a></td>&nbsp;
+                <td class="show"><a href="/edit/user/{{.User_id}}">Edit</a></td>&nbsp;
+            </tr>
+            {{end}}
+          </tbody>
+        </table>
+        <ul class="pagination"></ul>
+      </div>
+</div>
+<script>
+var options = {
+  valueNames: ['first_name', 'last_name', 'birthdate', 'gender', 'email'],
+  page: 5,
+  pagination: true
+};
+
+var customerList = new List('customers', options);
+</script>
+{{ template "footer" . }}

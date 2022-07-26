@@ -1,0 +1,48 @@
+{{ template "header" . }}
+<div class="container m-5 p-2 rounded mx-auto bg-light shadow">
+    <!-- App title section -->
+    <div class="row m-1 p-4">
+        <div class="col">
+            <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
+                <p>Edit Customer</p>
+            </div>
+        </div>
+    </div>
+    <div class="p-2 m-2 mx-4 border-black-25 border-bottom"></div>
+    <!-- Customer list section -->
+    <div class="row mx-1 px-5 pb-3 w-80">
+        <div class="col mx-auto">
+            <!-- Customer Item-->
+            {{range .Customers}}
+            <form action="/editCustomer" method="POST">
+                <input name="user_id" type="hidden" value="{{.User_id}}" />
+                <label>First Name:</label><input name="first_name" type="text" value="{{.First_name}}" maxlength="100" required><br />
+                <label>Last Name:</label><input name="last_name" type="text" value="{{.Last_name}}" maxlength="100" required><br />
+                <label>Birth Date:</label><input name="birth_date" type="date" min="1962-01-01" max="2004-01-01" value="{{.Birth_date}}" required><br />
+                <label>Gender:</label><select id="gender" name="gender" type="text" selected="{{.Gender}}" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select><br />
+                <label>Email:</label><input name="email" type="email" value="{{.Email}}" required><br />
+                <label>Address:</label><input name="address" type="text" value="{{.Address}}" maxlength="200"><br />
+            <div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+            <br>
+            <button onclick="removeFromDb('{{.User_id}}')" class="btn btn-primary">Delete</button>
+            </form>
+        
+            {{end}}
+        </div>
+    </div>
+</div>
+
+<script>function removeFromDb(item){
+    fetch(`/delete?item=${item}`, {method: "Delete"}).then(res =>{
+        if (res.status == 200){
+            window.location.pathname = "/"
+        }
+    })
+ }</script>
+
+{{ template "footer" . }}

@@ -1,0 +1,30 @@
+{{ template "header" . }}
+<div class="container m-5 p-2 rounded mx-auto bg-light shadow">
+    <!-- App title section -->
+    <div class="row m-1 p-4">
+        <div class="col">
+            <div class="p-1 h1 text-primary text-center mx-auto display-inline-block">
+                <p>Show Customer</p>
+            </div>
+        </div>
+    </div>
+    <div class="p-2 m-2 mx-4 border-black-25 border-bottom"></div>
+    <!-- Customer list section -->
+    <div class="row mx-1 px-5 pb-3 w-80">
+        <div class="col mx-auto">
+            <!-- Customer Item-->
+            {{range .Customers}}
+            <ul>
+                <li>First Name: {{.First_name}}</li>
+                <li>Last Name: {{.Last_name}}</li>
+                <li>Birth Date: {{.Birth_date}}</li>
+                <li>Gender: {{.Gender}}</li>
+                <li>Email: {{.Email}}</li>
+                <li>Address: {{.Address}}</li>
+            </ul>
+            {{end}}
+        </div>
+    </div>
+</div>
+
+{{ template "footer" . }}
